@@ -4,6 +4,7 @@ import { useChat, Message } from 'ai/react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+import { getAssetPath } from './utils';
 
 interface SearchResult {
   title: string;
@@ -66,7 +67,7 @@ export default function Page() {
   }, [isSearching]);
 
   const { messages, input, handleInputChange, handleSubmit: handleChatSubmit, setMessages } = useChat({
-    api: '/api/chat',
+    api: getAssetPath('/api/chat'),
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -81,7 +82,7 @@ export default function Page() {
 
     try {
       // First, get web search results
-      const searchResponse = await fetch('/api/exawebsearch', {
+      const searchResponse = await fetch(getAssetPath('/api/exawebsearch'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -255,7 +256,7 @@ export default function Page() {
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                       </svg>
-                      <Image src="/exa_logo.png" alt="Exa" width={45} height={45} />
+                      <Image src={getAssetPath('/exa_logo.png')} alt="Exa" width={45} height={45} />
                       <h3 className="text-md font-medium">Search Results</h3>
                     </button>
                   </div>
