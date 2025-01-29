@@ -89,7 +89,7 @@ export default function Page() {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6 bg-[var(--secondary-default)]">
       <div className="space-y-6">
-        {messages.filter(m => m.role !== 'system').map((message, index, filteredMessages) => (
+        {messages.filter(m => m.role !== 'system').map((message) => (
           <div key={message.id}>
             <div
               className={`flex ${
@@ -107,9 +107,8 @@ export default function Page() {
               </div>
             </div>
             
-            {/* Show sources after user message and before AI response */}
-            {message.role === 'user' && !isSearching && searchResults.length > 0 && 
-             index < filteredMessages.length - 1 && filteredMessages[index + 1].role === 'assistant' && (
+            {/* Show search results after user message */}
+            {message.role === 'user' && !isSearching && searchResults.length > 0 && (
               <div className="my-6 space-y-3">
                 {/* Header with logo */}
                 <div className="flex items-center gap-2">
@@ -139,28 +138,6 @@ export default function Page() {
           </div>
         ))}
       </div>
-
-      {isSearching && (
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 text-gray-600">
-            <Image src="/exa_logo.png" alt="Exa Logo" width={20} height={20} />
-            <span className="text-sm">is searching: {input}</span>
-          </div>
-          <div className="bg-[var(--secondary-darker)] rounded p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-sm font-medium">Searching on Exa</span>
-            </div>
-            {searchResults.map((result, index) => (
-              <div key={index} className="py-2">
-                <a href={result.url} target="_blank" rel="noopener noreferrer" 
-                   className="text-sm text-gray-700 hover:text-[var(--brand-default)]">
-                  {result.title}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {searchError && (
         <div className="p-4 bg-red-50 rounded border border-red-100">
