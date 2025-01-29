@@ -1,6 +1,8 @@
 # 💬 Exa & Deepseek R1 Chat App
 ### Powered by [Exa](https://exa.ai)
 
+![Screenshot](https://exa-deepseek-chat.vercel.app/opengraph-image.jpg)
+
 <br>
 
 ## 🎯 What is Exa & Deepseek Chat App?
