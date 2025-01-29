@@ -302,9 +302,16 @@ export default function Page() {
               <button 
                 type="submit"
                 disabled={!input.trim() || isSearching}
-                className="px-5 py-3 bg-[var(--brand-default)] text-white rounded-md hover:bg-[var(--brand-muted)] font-medium min-w-[120px]"
+                className="px-5 py-3 bg-[var(--brand-default)] text-white rounded-md hover:bg-[var(--brand-muted)] font-medium w-[120px]"
               >
-                {isSearching ? `Searching${loadingDots}` : 'Search'}
+                {isSearching ? (
+                  <span className="inline-flex justify-center items-center">
+                    <span>Searching</span>
+                    <span className="w-[24px] text-left">{loadingDots}</span>
+                  </span>
+                ) : (
+                  'Search'
+                )}
               </button>
             </div>
           </form>
