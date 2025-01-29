@@ -46,6 +46,8 @@ export default function Page() {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [previousQueries, setPreviousQueries] = useState<string[]>([]);
+  const [isThinkingExpanded, setIsThinkingExpanded] = useState(true);
+  const [isSourcesExpanded, setIsSourcesExpanded] = useState(true);
 
   const { messages, input, handleInputChange, handleSubmit: handleChatSubmit, setMessages } = useChat({
     api: '/api/chat',
@@ -124,7 +126,7 @@ export default function Page() {
             target="_blank"
             className="flex items-center gap-1.5 text-md text-gray-600 hover:text-[var(--brand-default)] transition-colors"
           >
-            <span>see project code here</span>
+            <span className="underline">see project code here</span>
             <svg
               className="w-3.5 h-3.5"
               fill="none"
@@ -166,19 +168,34 @@ export default function Page() {
                             {(thinking || !isComplete) && (
                               <div className="mb-10 space-y-4">
                                 <div className="flex items-center gap-2">
-                                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                                  </svg>
-                                  <h3 className="text-md font-medium">Thinking</h3>
+                                  <button 
+                                    onClick={() => setIsThinkingExpanded(!isThinkingExpanded)}
+                                    className="flex items-center gap-2"
+                                  >
+                                    <svg 
+                                      className={`w-5 h-5 transform hover:text-[var(--brand-default)] transition-colors transition-transform ${isThinkingExpanded ? 'rotate-0' : '-rotate-180'}`} 
+                                      fill="none" 
+                                      viewBox="0 0 24 24" 
+                                      stroke="currentColor"
+                                    >
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                                    </svg>
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                    </svg>
+                                    <h3 className="text-md font-medium">Thinking</h3>
+                                  </button>
                                 </div>
-                                <div className="pl-4 relative">
-                                  <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                                  <div className="text-md text-gray-600 whitespace-pre-wrap">{thinking}</div>
-                                </div>
+                                {isThinkingExpanded && (
+                                  <div className="pl-4 relative">
+                                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                                    <div className="text-sm text-gray-600 whitespace-pre-wrap">{thinking}</div>
+                                  </div>
+                                )}
                               </div>
                             )}
                             {isComplete && finalResponse && (
-                              <div className="prose prose-sm max-w-none px-4 text-gray-800 text-lg">
+                              <div className="prose prose-base max-w-none px-4 text-gray-800 text-base">
                                 <ReactMarkdown>{finalResponse}</ReactMarkdown>
                               </div>
                             )}
@@ -197,34 +214,49 @@ export default function Page() {
                 <div className="my-10 space-y-4">
                   {/* Header with logo */}
                   <div className="flex items-center gap-2">
-                    <Image src="/exa_logo.png" alt="Exa" width={45} height={45} />
-                    <h3 className="text-md font-medium">Search Results</h3>
+                    <button 
+                      onClick={() => setIsSourcesExpanded(!isSourcesExpanded)}
+                      className="flex items-center gap-2"
+                    >
+                      <svg 
+                        className={`w-5 h-5 transform hover:text-[var(--brand-default)] transition-colors transition-transform ${isSourcesExpanded ? 'rotate-0' : '-rotate-180'}`} 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                      </svg>
+                      <Image src="/exa_logo.png" alt="Exa" width={45} height={45} />
+                      <h3 className="text-md font-medium">Search Results</h3>
+                    </button>
                   </div>
 
                   {/* Results with vertical line */}
-                  <div className="pl-4 relative">
-                    {/* Vertical line */}
-                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                    
-                    {/* Content */}
-                    <div className="space-y-2">
-                      {searchResults.map((result, idx) => (
-                        <div key={idx} className="text-sm">
-                          <a href={result.url} target="_blank" 
-                             className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
-                            [{idx + 1}] {result.title}
-                            {result.favicon && (
-                              <img 
-                                src={result.favicon} 
-                                alt=""
-                                className="w-4 h-4 object-contain"
-                              />
-                            )}
-                          </a>
-                        </div>
-                      ))}
+                  {isSourcesExpanded && (
+                    <div className="pl-4 relative">
+                      {/* Vertical line */}
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                      
+                      {/* Content */}
+                      <div className="space-y-2">
+                        {searchResults.map((result, idx) => (
+                          <div key={idx} className="text-sm">
+                            <a href={result.url} target="_blank" 
+                               className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
+                              [{idx + 1}] {result.title}
+                              {result.favicon && (
+                                <img 
+                                  src={result.favicon} 
+                                  alt=""
+                                  className="w-4 h-4 object-contain"
+                                />
+                              )}
+                            </a>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               )}
             </div>
