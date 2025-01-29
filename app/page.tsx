@@ -142,7 +142,7 @@ export default function Page() {
           </a>
         </div>
       </div>
-      <div className="md:max-w-4xl mx-auto p-6 pt-20 space-y-6 bg-[var(--secondary-default)]">
+      <div className="md:max-w-4xl mx-auto p-6 pt-20 pb-24 space-y-6 bg-[var(--secondary-default)]">
         <div className="space-y-6">
           {messages.filter(m => m.role !== 'system').map((message) => (
             <div key={message.id}>
@@ -237,24 +237,32 @@ export default function Page() {
             <p className="text-sm text-red-800">⚠️ {searchError}</p>
           </div>
         )}
+      </div>
 
-        <form onSubmit={handleSubmit} className="sticky bottom-6">
-          <div className="flex gap-2">
-            <input
-              value={input}
-              onChange={handleInputChange}
-              placeholder="Ask something..."
-              className="flex-1 p-3 bg-white border-0 rounded shadow-sm focus:outline-none focus:ring-1 focus:ring-[var(--brand-default)] text-[15px]"
-            />
-            <button 
-              type="submit"
-              disabled={!input.trim() || isSearching}
-              className="px-5 py-3 bg-[var(--brand-default)] text-white rounded hover:bg-[var(--brand-muted)] disabled:opacity-50 font-medium"
-            >
-              {isSearching ? 'Searching...' : 'Search'}
-            </button>
-          </div>
-        </form>
+      <div className={`${messages.filter(m => m.role !== 'system').length === 0 
+        ? 'fixed inset-0 flex items-center justify-center bg-transparent' 
+        : 'fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t'} z-50 transition-all duration-300`}>
+        <div className={`${messages.filter(m => m.role !== 'system').length === 0 
+          ? 'w-full md:max-w-2xl px-6' 
+          : 'w-full md:max-w-4xl p-5'}`}>
+          <form onSubmit={handleSubmit}>
+            <div className={`flex gap-2`}>
+              <input
+                value={input}
+                onChange={handleInputChange}
+                placeholder="Ask something..."
+                className={`flex-1 p-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--brand-default)] text-[15px] `}
+              />
+              <button 
+                type="submit"
+                disabled={!input.trim() || isSearching}
+                className="px-5 py-3 bg-[var(--brand-default)] text-white rounded-md hover:bg-[var(--brand-muted)] font-medium"
+              >
+                {isSearching ? 'Searching...' : 'Search'}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
