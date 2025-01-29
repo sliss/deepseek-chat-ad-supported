@@ -58,45 +58,11 @@ export default function TwitterWrapped() {
 
   return (
     <div className="w-full border-6 md:max-w-4xl p-2 md:p-6">
-      <h1 className="md:text-6xl text-4xl pb-5 font-medium opacity-0 animate-fade-up [animation-delay:200ms]">
-        Your
-        <span className="text-brand-default"> Twitter </span>
-        Wrapped
+      <h1 className="text-6xl pb-5 font-medium opacity-0 animate-fade-up [animation-delay:200ms] leading-[1.4]">
+        An opensource chat app powered by
+        <span className="text-brand-default"> Exa API </span> <br/>
+        and DeepSeek R1
       </h1>
-
-      <p className="text-black mb-12 opacity-0 animate-fade-up [animation-delay:400ms]">
-        AI analyzes your Twitter profile and gives you your 2024 recap
-      </p>
-
-      <form onSubmit={handleGenerate} className="space-y-6">
-        <input
-          value={twitterUsername}
-          onChange={(e) => setTwitterUsername(e.target.value)}
-          placeholder="Enter Your Twitter Username"
-          className="w-full bg-white p-3 border box-border outline-none rounded-none-sm ring-2 ring-brand-default resize-none opacity-0 animate-fade-up [animation-delay:600ms]"
-        />
-        <button
-          type="submit"
-          className={`w-full bg-brand-default text-white font-semibold px-2 py-2 rounded-none-sm transition-opacity opacity-0 animate-fade-up [animation-delay:800ms] min-h-[50px] ring-2 ring-brand-default ${
-            isGenerating ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-          disabled={isGenerating}
-        >
-          {isGenerating ? 'Creating...' : 'Create My Twitter Recap'}
-        </button>
-      </form>
-
-      {error && (
-        <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-none">
-          {error}
-        </div>
-      )}
-
-      {twitterRecap && (
-        <div className="mt-20 w-full bg-white p-4 border outline-none resize-none min-h-[200px] overflow-auto rounded-none opacity-0 animate-fade-up [animation-delay:200ms]">
-          {twitterRecap}
-        </div>
-      )}
     </div>
   );
 }

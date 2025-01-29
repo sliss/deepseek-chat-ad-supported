@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://exa-deepseek-chat.vercel.app/opengraph-image.jpg",
         width: 1200,
         height: 630,
         alt: "Exa & Deepseek Chat App"
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Exa & Deepseek Chat App",
     description: "An opensource chat application built with Exa for web search and Deepseek R1.",
-    images: ["/og-image.png"]
+    images: ["https://exa-deepseek-chat.vercel.app/opengraph-image.jpg"]
   },
   metadataBase: new URL("https://exa-deepseek-chat.vercel.app"),
   robots: {
