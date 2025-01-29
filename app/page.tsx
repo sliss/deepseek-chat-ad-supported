@@ -1,7 +1,7 @@
 'use client';
 
 import { useChat, Message } from 'ai/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 
@@ -48,6 +48,21 @@ export default function Page() {
   const [previousQueries, setPreviousQueries] = useState<string[]>([]);
   const [isThinkingExpanded, setIsThinkingExpanded] = useState(true);
   const [isSourcesExpanded, setIsSourcesExpanded] = useState(true);
+  const [loadingDots, setLoadingDots] = useState('');
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isSearching) {
+      let count = 0;
+      interval = setInterval(() => {
+        count = (count + 1) % 4;
+        setLoadingDots('.'.repeat(count));
+      }, 500);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isSearching]);
 
   const { messages, input, handleInputChange, handleSubmit: handleChatSubmit, setMessages } = useChat({
     api: '/api/chat',
@@ -287,9 +302,9 @@ export default function Page() {
               <button 
                 type="submit"
                 disabled={!input.trim() || isSearching}
-                className="px-5 py-3 bg-[var(--brand-default)] text-white rounded-md hover:bg-[var(--brand-muted)] font-medium"
+                className="px-5 py-3 bg-[var(--brand-default)] text-white rounded-md hover:bg-[var(--brand-muted)] font-medium min-w-[120px]"
               >
-                {isSearching ? 'Searching...' : 'Search'}
+                {isSearching ? `Searching${loadingDots}` : 'Search'}
               </button>
             </div>
           </form>
