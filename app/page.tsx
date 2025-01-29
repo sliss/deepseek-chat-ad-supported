@@ -122,7 +122,6 @@ export default function Page() {
           <a
             href="https://github.com/exa-labs/exa-deepseek-chat"
             target="_blank"
-            rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-md text-gray-600 hover:text-[var(--brand-default)] transition-colors"
           >
             <span>see project code here</span>
@@ -174,12 +173,12 @@ export default function Page() {
                                 </div>
                                 <div className="pl-4 relative">
                                   <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                                  <div className="text-sm text-gray-600 whitespace-pre-wrap">{thinking}</div>
+                                  <div className="text-md text-gray-600 whitespace-pre-wrap">{thinking}</div>
                                 </div>
                               </div>
                             )}
                             {isComplete && finalResponse && (
-                              <div className="prose prose-sm max-w-none px-4 text-black">
+                              <div className="prose prose-sm max-w-none px-4 text-black text-md">
                                 <ReactMarkdown>{finalResponse}</ReactMarkdown>
                               </div>
                             )}
@@ -211,7 +210,7 @@ export default function Page() {
                     <div className="space-y-2">
                       {searchResults.map((result, idx) => (
                         <div key={idx} className="text-sm">
-                          <a href={result.url} target="_blank" rel="noopener noreferrer" 
+                          <a href={result.url} target="_blank" 
                              className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
                             [{idx + 1}] {result.title}
                             {result.favicon && (
@@ -243,10 +242,10 @@ export default function Page() {
         ? 'fixed inset-0 flex items-center justify-center bg-transparent' 
         : 'fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t'} z-50 transition-all duration-300`}>
         <div className={`${messages.filter(m => m.role !== 'system').length === 0 
-          ? 'w-full md:max-w-2xl px-6' 
-          : 'w-full md:max-w-4xl p-5'}`}>
-          <form onSubmit={handleSubmit}>
-            <div className={`flex gap-2`}>
+          ? 'w-full max-w-2xl mx-auto px-6' 
+          : 'w-full max-w-4xl mx-auto px-6 py-4'}`}>
+          <form onSubmit={handleSubmit} className="flex justify-center">
+            <div className={`flex gap-2 w-full max-w-4xl`}>
               <input
                 value={input}
                 onChange={handleInputChange}
