@@ -110,17 +110,29 @@ export default function Page() {
             {/* Show sources after user message and before AI response */}
             {message.role === 'user' && !isSearching && searchResults.length > 0 && 
              index < filteredMessages.length - 1 && filteredMessages[index + 1].role === 'assistant' && (
-              <div className="my-4">
-                <div className="bg-white rounded p-4 space-y-2 shadow-sm">
-                  <h3 className="text-sm font-medium text-gray-700">Found {searchResults.length} relevant sources:</h3>
-                  {searchResults.map((result, idx) => (
-                    <div key={idx} className="text-sm">
-                      <a href={result.url} target="_blank" rel="noopener noreferrer" 
-                         className="text-gray-600 hover:text-[var(--brand-default)]">
-                        [{idx + 1}] {result.title}
-                      </a>
-                    </div>
-                  ))}
+              <div className="my-6 space-y-3">
+                {/* Header with logo */}
+                <div className="flex items-center gap-2">
+                  <Image src="/exa_logo.png" alt="Exa" width={40} height={40} />
+                  <h3 className="text-sm font-medium">Search Results</h3>
+                </div>
+
+                {/* Results with vertical line */}
+                <div className="pl-4 relative">
+                  {/* Vertical line */}
+                  <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                  
+                  {/* Content */}
+                  <div className="space-y-2">
+                    {searchResults.map((result, idx) => (
+                      <div key={idx} className="text-sm">
+                        <a href={result.url} target="_blank" rel="noopener noreferrer" 
+                           className="text-gray-600 hover:text-[var(--brand-default)]">
+                          [{idx + 1}] {result.title}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
