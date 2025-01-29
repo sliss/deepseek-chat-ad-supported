@@ -313,7 +313,7 @@ export default function Page() {
 
       <div className={`${messages.filter(m => m.role !== 'system').length === 0 
         ? 'fixed inset-0 flex items-center justify-center bg-transparent' 
-        : 'fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t'} z-50 transition-all duration-300`}>
+        : 'fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t'} z-40 transition-all duration-300`}>
         <div className={`${messages.filter(m => m.role !== 'system').length === 0 
           ? 'w-full max-w-2xl mx-auto px-6' 
           : 'w-full max-w-4xl mx-auto px-6 py-4'}`}>
