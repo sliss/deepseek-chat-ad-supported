@@ -15,6 +15,7 @@ export default function Page() {
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchError, setSearchError] = useState<string | null>(null);
+  const [previousQueries, setPreviousQueries] = useState<string[]>([]);
 
   const { messages, input, handleInputChange, handleSubmit: handleChatSubmit, setMessages } = useChat({
     api: '/api/chat',
@@ -34,7 +35,10 @@ export default function Page() {
       const searchResponse = await fetch('/api/exawebsearch', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: input }),
+        body: JSON.stringify({ 
+          query: input,
+          previousQueries: previousQueries.slice(-3)
+        }),
       });
 
       if (!searchResponse.ok) {
@@ -46,15 +50,9 @@ export default function Page() {
 
       // Format search context
       const searchContext = results.length > 0
-        ? `Web Search Results:\n\n${results
-            .map((r: SearchResult, i: number) => 
-              `Source [${i + 1}]:
-Title: ${r.title}
-URL: ${r.url}
-${r.author ? `Author: ${r.author}\n` : ''}${r.publishedDate ? `Date: ${r.publishedDate}\n` : ''}
-Content: ${r.text}
----`
-            ).join('\n\n')}\n\nInstructions: Based on the above search results, please provide a comprehensive answer to the user's query. When referencing information, cite the source number in brackets like [1], [2], etc.`
+        ? `Web Search Results:\n\n${results.map((r: SearchResult, i: number) => 
+            `Source [${i + 1}]:\nTitle: ${r.title}\nURL: ${r.url}\n${r.author ? `Author: ${r.author}\n` : ''}${r.publishedDate ? `Date: ${r.publishedDate}\n` : ''}Content: ${r.text}\n---`
+          ).join('\n\n')}\n\nInstructions: Based on the above search results, please provide a comprehensive answer to the user's query. When referencing information, cite the source number in brackets like [1], [2], etc.`
         : '';
 
       // Send both system context and user message in one request
@@ -75,6 +73,9 @@ Content: ${r.text}
       } else {
         handleChatSubmit(e);
       }
+
+      // Update previous queries after successful search
+      setPreviousQueries(prev => [...prev, input].slice(-3));
 
     } catch (err) {
       setSearchError(err instanceof Error ? err.message : 'Search failed');

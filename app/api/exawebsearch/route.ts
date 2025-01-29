@@ -8,14 +8,23 @@ const exa = new Exa(process.env.EXA_API_KEY as string);
 
 export async function POST(req: NextRequest) {
   try {
-    const { query } = await req.json();
+    const { query, previousQueries = [] } = await req.json();
     if (!query) {
       return NextResponse.json({ error: 'Query is required' }, { status: 400 });
     }
 
+    // Format previous queries as context
+    let contextualQuery = query;
+    if (previousQueries.length > 0) {
+      const context = previousQueries
+        .map((q: string) => `Previous question: ${q}`)
+        .join('\n');
+      contextualQuery = `${context}\n\nNow answer the question: ${query}`;
+    }
+
     // Use Exa to search for content related to the claim
     const result = await exa.searchAndContents(
-      query,
+      contextualQuery,
       {
         type: "auto",
         text: true,
