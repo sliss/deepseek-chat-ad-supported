@@ -1,11 +1,13 @@
 # 💬 Exa & Deepseek R1 Chat App
-### Powered by [Exa API](https://exa.ai)
+### Powered by [Exa](https://exa.ai)
 
 <br>
 
 ## 🎯 What is Exa & Deepseek Chat App?
 
-Exa & Deepseek Chat App is a free and open-source chat app that uses Exa's API for web search and Deepseek R1 LLM for reasoning. This app provides a cool and simple chat experience which you can clone and build upon.
+Exa & Deepseek Chat App is a free and open-source chat app that uses Exa's API for web search and Deepseek R1 LLM for reasoning.
+
+This app provides a cool and simple chat experience which you can clone and build upon.
 
 <br>
 
@@ -36,17 +38,13 @@ cd exa-deepseek-chat
 2. Install dependencies
 ```bash
 npm install
-# or
-yarn install
 ```
 
-3. Set up environment variables as described in the section below
+3. Set up environment variables (for Exa and Fireworks)
 
 4. Run the development server
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 5. Open http://localhost:3000 in your browser
@@ -61,7 +59,7 @@ yarn dev
 
 <br>
 
-## ⭐ About [Exa.ai](https://exa.ai)
+## ⭐ About [Exa](https://exa.ai)
 
 This project is powered by [Exa.ai](https://exa.ai), a web search API designed specifically for AI applications. Exa provides:
 
