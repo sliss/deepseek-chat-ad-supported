@@ -49,7 +49,7 @@ npm install
 npm run dev
 ```
 
-5. Open http://localhost:3000 in your browser
+5. Open http://localhost:3000/deepseekchat in your browser
 
 <br>
 
