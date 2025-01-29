@@ -178,7 +178,7 @@ export default function Page() {
                               </div>
                             )}
                             {isComplete && finalResponse && (
-                              <div className="prose prose-sm max-w-none px-4 text-black text-md">
+                              <div className="prose prose-sm max-w-none px-4 text-gray-800 text-lg">
                                 <ReactMarkdown>{finalResponse}</ReactMarkdown>
                               </div>
                             )}
