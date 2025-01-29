@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💬 Exa & Deepseek R1 Chat App
+### Powered by [Exa API](https://exa.ai)
 
-## Getting Started
+![Screenshot](https://exa-deepseek-chat.vercel.app/og-image.png)
 
-First, run the development server:
+<br>
 
+## 🎯 What is Exa & Deepseek Chat App?
+
+Exa & Deepseek Chat App is a free and open-source chat app that uses Exa's API for web search and Deepseek R1 LLM for reasoning. This app provides a cool and simple chat experience which you can clone and build upon.
+
+<br>
+
+## 💻 Tech Stack
+- **Search Engine**: [Exa API](https://exa.ai) - Web search API
+- **Language Model**: Deepseek R1 via Fireworks AI
+- **Frontend**: [Next.js](https://nextjs.org/docs) with App Router, [TailwindCSS](https://tailwindcss.com), TypeScript
+- **AI Integration**: [Vercel AI SDK](https://sdk.vercel.ai/docs/ai-sdk-core)
+- **Hosting**: [Vercel](https://vercel.com/)
+
+<br>
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js
+- Exa API key
+- Fireworks AI API key (For Deepseek R1)
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/exa-labs/exa-deepseek-chat.git
+cd exa-deepseek-chat
+```
+
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables as described in the section below
+
+4. Run the development server
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open http://localhost:3000 in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<br>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔑 API Keys & Environment Setup
 
-## Learn More
+### Required API Keys
+* **Exa API Key**: Get from [Exa Dashboard](https://dashboard.exa.ai/api-keys)
+* **Deepseek API Key (From Fireworks AI)**: Get from your [Fireworks Dashboard](https://app.fireworks.ai/api-keys)
 
-To learn more about Next.js, take a look at the following resources:
+<br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⭐ About [Exa.ai](https://exa.ai)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is powered by [Exa.ai](https://exa.ai), a web search API designed specifically for AI applications. Exa provides:
 
-## Deploy on Vercel
+* Quickly finds up-to-date information from the web
+* Improves the accuracy of answers by real-time web search
+* Uses high reasoning LLM to provide accurate answers
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[Try the New Exa Websets](https://exa.ai/websets)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<br>
+
+---
+
+Built with ❤️ by the Exa team
