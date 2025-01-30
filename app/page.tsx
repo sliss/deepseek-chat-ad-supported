@@ -290,8 +290,9 @@ export default function Page() {
                       {/* Content */}
                       <div className="space-y-2">
                         {searchResults.map((result, idx) => (
-                          <div key={idx} className="text-sm">
-                            <a href={result.url} target="_blank" 
+                          <div key={idx} className="text-sm group relative">
+                            <a href={result.url} 
+                               target="_blank" 
                                className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
                               [{idx + 1}] {result.title}
                               {result.favicon && (
@@ -302,6 +303,10 @@ export default function Page() {
                                 />
                               )}
                             </a>
+                            {/* URL tooltip */}
+                            <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute left-0 -bottom-6 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap z-10 pointer-events-none">
+                              {result.url}
+                            </div>
                           </div>
                         ))}
                       </div>
