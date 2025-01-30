@@ -343,6 +343,7 @@ export default function Page() {
                 value={input}
                 onChange={handleInputChange}
                 placeholder="Ask something..."
+                autoFocus
                 className={`flex-1 p-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--brand-default)] text-base`}
               />
               <button 
