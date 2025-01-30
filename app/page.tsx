@@ -373,7 +373,7 @@ export default function Page() {
             {/* Add the notice text */}
             {showModelNotice && (
               <p className="text-xs md:text-sm text-gray-600 mt-8">
-                Switched to DeepSeek V3 model from DeepSeek R1 because of high traffic
+                Switched to DeepSeek V3 model from DeepSeek R1 due to high traffic
               </p>
             )}
           </form>
