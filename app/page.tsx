@@ -51,6 +51,7 @@ export default function Page() {
   const [isThinkingExpanded, setIsThinkingExpanded] = useState(true);
   const [isSourcesExpanded, setIsSourcesExpanded] = useState(true);
   const [loadingDots, setLoadingDots] = useState('');
+  const [showModelNotice, setShowModelNotice] = useState(true);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -97,6 +98,8 @@ export default function Page() {
 
       const { results } = await searchResponse.json();
       setSearchResults(results);
+      // Hide the notice when search results appear
+      setShowModelNotice(false);
       setIsSearching(false);
       setIsLLMLoading(true);
 
@@ -342,8 +345,8 @@ export default function Page() {
         <div className={`${messages.filter(m => m.role !== 'system').length === 0 
           ? 'w-full max-w-2xl mx-auto px-6' 
           : 'w-full max-w-4xl mx-auto px-6 py-4'}`}>
-          <form onSubmit={handleSubmit} className="flex justify-center">
-            <div className={`flex gap-2 w-full max-w-4xl`}>
+          <form onSubmit={handleSubmit} className="flex flex-col items-center">
+            <div className="flex gap-2 w-full max-w-4xl">
               <input
                 value={input}
                 onChange={handleInputChange}
@@ -366,6 +369,13 @@ export default function Page() {
                 )}
               </button>
             </div>
+            
+            {/* Add the notice text */}
+            {showModelNotice && (
+              <p className="text-xs md:text-sm text-gray-600 mt-8">
+                Switched to DeepSeek V3 model from DeepSeek R1 because of high traffic
+              </p>
+            )}
           </form>
         </div>
       </div>
