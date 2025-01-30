@@ -149,12 +149,12 @@ export default function Page() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-b z-50">
+      <div className="fixed top-0 left-0 right-0 lg:bg-transparent bg-white/80 backdrop-blur-sm lg:backdrop-blur-none border-b lg:border-b-0 z-50">
         <div className="md:max-w-4xl mx-auto px-6 py-3 flex justify-end">
           <a
             href="https://github.com/exa-labs/exa-deepseek-chat"
             target="_blank"
-            className="flex items-center gap-1.5 text-md text-gray-600 hover:text-[var(--brand-default)] transition-colors"
+            className="flex items-center gap-1.5 text-md text-gray-600 hover:text-[var(--brand-default)] transition-colors lg:absolute lg:right-6 lg:top-6"
           >
             <span className="underline">see project code here</span>
             <svg
