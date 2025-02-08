@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       {
         type: "auto",
         text: true,
-        numResults: 3,
+        numResults: 1,
         // livecrawl: "always",
       }
     );

@@ -54,6 +54,7 @@ export default function Page() {
   const [showModelNotice, setShowModelNotice] = useState(true);
 
   useEffect(() => {
+    
     let interval: NodeJS.Timeout;
     if (isSearching) {
       let count = 0;
@@ -66,6 +67,50 @@ export default function Page() {
       if (interval) clearInterval(interval);
     };
   }, [isSearching]);
+
+  // Add this new useEffect for ads initialization
+  useEffect(() => {
+    // @ts-ignore
+    window.stratosSettings = {
+      publisherId: '6660be5c4e70d17b07751c91', // prod demo publisher id
+      disableInitialLoad: true,
+      adSlots: [
+        {
+          adUnitCode: 'demo-clarity-chat-ad-infeed',
+          adFormat: 'chat',
+          size: 'fluid',
+        }
+      ],
+      apiEndpoint: '/api/proxy-ads',
+      cssOverrides:
+        `:root {
+        --background: #f5efdd;
+        --text: #000;
+        --header: #ffffff4c;
+        --header-background: #ffffff10;
+        --title: #000;
+        --highlight: #c8ddff;
+        --action-button: #3b82f6;
+        --question-bubble: #FFF;
+        --radius: 5px;
+        --user-chat: #0061ff;
+        --system-chat: #e0e0e0;
+      }
+      #visit-site-link {
+        color: #FFF;
+      }
+      .ad-questions li:hover {
+        color: #000;
+      }`
+    };
+
+    // @ts-ignore
+    window.stratos = window.stratos || { queue: [] };
+    // @ts-ignore
+    window.stratos.queue.push(function() {
+      console.log('Stratos initialized!')
+    });
+  }, []);
 
   const { messages, input, handleInputChange, handleSubmit: handleChatSubmit, setMessages } = useChat({
     api: getAssetPath('/api/chat'),
@@ -80,6 +125,18 @@ export default function Page() {
     setIsLLMLoading(false);
     setSearchResults([]);
     setSearchError(null);
+
+    // Call getAds immediately with the search input
+    // @ts-ignore
+    window.stratos.queue.push(function() {
+      // @ts-ignore
+      window.stratos.getAds(input, true);
+      // Add renderAds call with setTimeout to ensure anchor exists
+      setTimeout(() => {
+        // @ts-ignore
+        window.stratos.renderAds();
+      }, 0);
+    });
 
     try {
       // First, get web search results
@@ -291,6 +348,9 @@ export default function Page() {
                         </div>
                       </div>
                     )}
+
+                    {/* Add the ad anchor div here */}
+                    <div id="demo-clarity-chat-ad-infeed"></div>
 
                     {isLLMLoading && (
                       <div className="pt-6 flex items-center gap-2 text-[var(--brand-default)]">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/next';
+import Script from "next/script";
 
 // Load the ABCDiatype font (Regular and Bold only)
 const abcdDiatype = localFont({
@@ -58,6 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script src='https://js.stratos.blue/stratos.js' />
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
