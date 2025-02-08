@@ -4,26 +4,26 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 231, 231, 245;
+  --background-start-rgb: 231, 245, 250;
   --background-end-rgb: 255, 255, 255;
 
-  /* COLORS */
-  --brand-default: #254bf1;
-  --brand-fainter: #e7ebfd;
-  --brand-faint: #c6cfff;
-  --brand-subtle: #a1aff7;
-  --brand-muted: #4d87e7;
-  --brand-dark: #0d2189;
-  --brand-darker: #000a40;
+  /* COLORS - Updated for Mr. Meeseeks theme */
+  --brand-default: #69c4ea;  /* Mr. Meeseeks blue */
+  --brand-fainter: #e7f5fa;
+  --brand-faint: #c6e9f7;
+  --brand-subtle: #8fd3ef;
+  --brand-muted: #4ab5e5;
+  --brand-dark: #2d9fd3;
+  --brand-darker: #1a7ca8;
 
-  --secondary-accent: #9f9672;
-  --secondary-accent2x: #89805d;
-  --secondary-dark: #f4f1e7;
-  --secondary-darker: #efebdc;
-  --secondary-darkest: #e5e0cd;
-  --secondary-default: #faf7ec;
-  --secondary-faint: #fffdf5;
-  --secondary-fainter: #fffefa;
+  --secondary-accent: #ff8c69;  /* Warm accent color */
+  --secondary-accent2x: #ff7f57;
+  --secondary-dark: #fff5f2;
+  --secondary-darker: #ffebe5;
+  --secondary-darkest: #ffe0d6;
+  --secondary-default: #fff9f7;
+  --secondary-faint: #fffafa;
+  --secondary-fainter: #fffcfc;
 
   --gray-50: #fafafa;
   --gray-100: #f5f5f5;
@@ -75,31 +75,41 @@ body {
 
 :root {
   --border-default: var(--gray-300);
-  --border-radius-default: 2px;
+  --border-radius-default: 8px;  /* Increased border radius for a more playful look */
 
   /* Typography */
   --font-family-sans: 'ABCDiatype', 'Trebuchet MS', sans-serif;
-  --font-family-serif: 'Reckless', Georgia, serif;
-  --text-light-default: #111827;
-  --text-light-muted: #6b7280;
-  --text-light-subtle: #9ca3af;
-  --text-light-faint: #e5e7eb;
-  --text-light-link: #1f40ed;
+  --font-family-serif: 'Old Standard TT', Georgia, serif;
+  --text-light-default: #2d3748;
+  --text-light-muted: #4a5568;
+  --text-light-subtle: #718096;
+  --text-light-faint: #e2e8f0;
+  --text-light-link: var(--brand-default);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-
   /* Apply ABCDiatype for body */
   font-family: var(--font-abcd-diatype), sans-serif;
 }
 
-/* Apply Reckless for headings */
+/* Apply Old Standard TT for headings with increased size */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-reckless), serif;
+  font-family: var(--font-family-serif);
+  color: var(--brand-default);
+  font-weight: 700;
 }
 
+/* Add some fun animations */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.bounce-hover:hover {
+  animation: bounce 0.5s ease infinite;
+}
 
 @layer utilities {
   .text-balance {

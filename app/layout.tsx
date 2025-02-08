@@ -22,11 +22,11 @@ const reckless = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Exa & Deepseek Chat App",
-  description: "An opensource chat application built with Exa for web search and Deepseek R1.",
+  title: "Mr. DeepSeeks - I'm Mr. DeepSeeks, look at me!",
+  description: "Hi! I'm Mr. DeepSeeks! I'll help answer your questions and then cease to exist!",
   openGraph: {
-    title: "Exa & Deepseek Chat App",
-    description: "An opensource chat application built with Exa for web search and Deepseek R1.",
+    title: "Mr. DeepSeeks - I'm Mr. DeepSeeks, look at me!",
+    description: "Hi! I'm Mr. DeepSeeks! I'll help answer your questions and then cease to exist!",
     type: "website",
     locale: "en_US",
     images: [
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
         url: "https://demo.exa.ai/deepseekchat/opengraph-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Exa & Deepseek Chat App"
+        alt: "Mr. DeepSeeks Chat"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Exa & Deepseek Chat App",
-    description: "An opensource chat application built with Exa for web search and Deepseek R1.",
+    title: "Mr. DeepSeeks - I'm Mr. DeepSeeks, look at me!",
+    description: "Hi! I'm Mr. DeepSeeks! I'll help answer your questions and then cease to exist!",
     images: ["https://demo.exa.ai/deepseekchat/opengraph-image.jpg"]
   },
   metadataBase: new URL("https://demo.exa.ai/deepseekchat"),

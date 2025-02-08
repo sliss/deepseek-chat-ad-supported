@@ -152,21 +152,19 @@ export default function Page() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-b z-50">
-        <div className="md:max-w-4xl mx-auto px-6 py-3 flex justify-between items-center">
-          <a
-            href="https://dashboard.exa.ai"
-            target="_blank"
-            className="flex items-center px-4 py-1 bg-brand-default text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
-          >
-            <span>Try Exa API</span>
-          </a>
+      {/* Header */}
+      <div className="fixed top-0 left-0 right-0 bg-[#69c4ea] border-b border-[#5ab3d9] z-50">
+        <div className="md:max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <h1 className="text-white text-2xl font-bold">Mr. DeepSeeks</h1>
+            <span className="text-[#e6f4fa] text-lg">Look at me!</span>
+          </div>
           <a
             href="https://github.com/exa-labs/exa-deepseek-chat"
             target="_blank"
-            className="flex items-center gap-1.5 text-md text-gray-600 hover:text-[var(--brand-default)] transition-colors"
+            className="flex items-center gap-1.5 text-md text-white/90 hover:text-white transition-colors"
           >
-            <span className="underline">see project code here</span>
+            <span className="underline">GitHub</span>
             <svg
               className="w-3.5 h-3.5"
               fill="none"
@@ -183,184 +181,182 @@ export default function Page() {
           </a>
         </div>
       </div>
-      <div className="md:max-w-4xl mx-auto p-6 pt-20 pb-24 space-y-6 bg-[var(--secondary-default)]">
-        <div className="space-y-6">
-          {messages.filter(m => m.role !== 'system').map((message) => (
-            <div key={message.id}>
-              <div
-                className={`flex ${
-                  message.role === 'user' ? 'justify-end' : 'justify-start'
-                }`}
-              >
-                <div
-                  className={`rounded py-3 max-w-[85%] ${
+
+      {/* Main content */}
+      <div className="min-h-screen bg-[#69c4ea] bg-opacity-10">
+        <div className="md:max-w-4xl mx-auto p-6 pt-20 pb-24 space-y-6">
+          <div className="space-y-6">
+            {messages.filter(m => m.role !== 'system').map((message) => (
+              <div key={message.id}>
+                <div className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`rounded-2xl py-3 max-w-[85%] ${
                     message.role === 'user'
-                      ? 'bg-[var(--secondary-darker)] text-black px-4'
-                      : 'text-gray-900'
-                  }`}
-                >
-                  {message.role === 'assistant' ? (
-                    <>
-                      {(() => {
-                        const { thinking, finalResponse, isComplete } = parseMessageContent(message.content);
-                        return (
-                          <>
-                            {(thinking || !isComplete) && (
-                              <div className="mb-10 space-y-4">
-                                <div className="flex items-center gap-2">
-                                  <button 
-                                    onClick={() => setIsThinkingExpanded(!isThinkingExpanded)}
-                                    className="flex items-center gap-2"
-                                  >
-                                    <svg 
-                                      className={`w-5 h-5 transform hover:text-[var(--brand-default)] transition-colors transition-transform ${isThinkingExpanded ? 'rotate-0' : '-rotate-180'}`} 
-                                      fill="none" 
-                                      viewBox="0 0 24 24" 
-                                      stroke="currentColor"
+                      ? 'bg-white text-black px-4 shadow-sm'
+                      : 'bg-[#69c4ea] text-white px-4 shadow-sm'
+                  }`}>
+                    {message.role === 'assistant' ? (
+                      <>
+                        {(() => {
+                          const { thinking, finalResponse, isComplete } = parseMessageContent(message.content);
+                          return (
+                            <>
+                              {(thinking || !isComplete) && (
+                                <div className="mb-10 space-y-4">
+                                  <div className="flex items-center gap-2">
+                                    <button 
+                                      onClick={() => setIsThinkingExpanded(!isThinkingExpanded)}
+                                      className="flex items-center gap-2"
                                     >
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                                    </svg>
-                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                                    </svg>
-                                    <h3 className="text-md font-medium">Thinking</h3>
-                                  </button>
-                                </div>
-                                {isThinkingExpanded && (
-                                  <div className="pl-4 relative">
-                                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                                      <div className="text-sm text-gray-600 whitespace-pre-wrap">{thinking}</div>
+                                      <svg 
+                                        className={`w-5 h-5 transform hover:text-[var(--brand-default)] transition-colors transition-transform ${isThinkingExpanded ? 'rotate-0' : '-rotate-180'}`} 
+                                        fill="none" 
+                                        viewBox="0 0 24 24" 
+                                        stroke="currentColor"
+                                      >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                                      </svg>
+                                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                      </svg>
+                                      <h3 className="text-md font-medium">Thinking</h3>
+                                    </button>
                                   </div>
-                                )}
-                              </div>
-                            )}
-                            {isComplete && finalResponse && (
-                              <div className="prose prose-base max-w-none px-4 text-gray-800 text-base">
-                                <ReactMarkdown>{finalResponse}</ReactMarkdown>
-                              </div>
-                            )}
-                          </>
-                        );
-                      })()}
-                    </>
-                  ) : (
-                    <div className="whitespace-pre-wrap text-[15px]">{message.content}</div>
-                  )}
-                </div>
-              </div>
-              
-              {/* Show search results after user message */}
-              {message.role === 'user' && !isSearching && searchResults.length > 0 && (
-                <div className="my-10 space-y-4">
-                  {/* Header with logo */}
-                  <div className="flex items-center gap-2">
-                    <button 
-                      onClick={() => setIsSourcesExpanded(!isSourcesExpanded)}
-                      className="flex items-center gap-2"
-                    >
-                      <svg 
-                        className={`w-5 h-5 transform hover:text-[var(--brand-default)] transition-colors transition-transform ${isSourcesExpanded ? 'rotate-0' : '-rotate-180'}`} 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                      </svg>
-                      <Image src={getAssetPath('/exa_logo.png')} alt="Exa" width={45} height={45} />
-                      <h3 className="text-md font-medium">Search Results</h3>
-                    </button>
-                  </div>
-
-                  {/* Results with vertical line */}
-                  {isSourcesExpanded && (
-                    <div className="pl-4 relative">
-                      {/* Vertical line */}
-                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                      
-                      {/* Content */}
-                      <div className="space-y-2">
-                        {searchResults.map((result, idx) => (
-                          <div key={idx} className="text-sm group relative">
-                            <a href={result.url} 
-                               target="_blank" 
-                               className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
-                              [{idx + 1}] {result.title}
-                              {result.favicon && (
-                                <img 
-                                  src={result.favicon} 
-                                  alt=""
-                                  className="w-4 h-4 object-contain"
-                                />
+                                  {isThinkingExpanded && (
+                                    <div className="pl-4 relative">
+                                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                                        <div className="text-sm text-gray-600 whitespace-pre-wrap">{thinking}</div>
+                                    </div>
+                                  )}
+                                </div>
                               )}
-                            </a>
-                            {/* URL tooltip */}
-                            <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute left-0 -bottom-6 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap z-10 pointer-events-none">
-                              {result.url}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                              {isComplete && finalResponse && (
+                                <div className="prose prose-base max-w-none px-4 text-gray-800 text-base">
+                                  <ReactMarkdown>{finalResponse}</ReactMarkdown>
+                                </div>
+                              )}
+                            </>
+                          );
+                        })()}
+                      </>
+                    ) : (
+                      <div className="whitespace-pre-wrap text-[15px]">{message.content}</div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Search results section */}
+                {message.role === 'user' && !isSearching && searchResults.length > 0 && (
+                  <div className="my-10 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <button 
+                        onClick={() => setIsSourcesExpanded(!isSourcesExpanded)}
+                        className="flex items-center gap-2 text-[#69c4ea] hover:text-[#5ab3d9] transition-colors"
+                      >
+                        <svg 
+                          className={`w-5 h-5 transform transition-transform ${isSourcesExpanded ? 'rotate-0' : '-rotate-180'}`} 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                        </svg>
+                        <div className="bounce-hover font-bold text-lg">Caaan do!</div>
+                      </button>
                     </div>
-                  )}
 
-                  {isLLMLoading && (
-                      <div className="pt-6 flex items-center gap-2 text-gray-500">
+                    {/* Search results with vertical line */}
+                    {isSourcesExpanded && (
+                      <div className="pl-4 relative">
+                        <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                        <div className="space-y-2">
+                          {searchResults.map((result, idx) => (
+                            <div key={idx} className="text-sm group relative">
+                              <a href={result.url} 
+                                 target="_blank" 
+                                 className="text-gray-600 hover:text-[var(--brand-default)] flex items-center gap-2">
+                                [{idx + 1}] {result.title}
+                                {result.favicon && (
+                                  <img 
+                                    src={result.favicon} 
+                                    alt=""
+                                    className="w-4 h-4 object-contain"
+                                  />
+                                )}
+                              </a>
+                              <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute left-0 -bottom-6 bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap z-10 pointer-events-none">
+                                {result.url}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {isLLMLoading && (
+                      <div className="pt-6 flex items-center gap-2 text-[var(--brand-default)]">
                         <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        <span className="text-sm">DeepSeek Thinking</span>
+                        <span className="text-sm">Ooooh yeah! Can do!</span>
                       </div>
                     )}
-
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {searchError && (
-          <div className="p-4 bg-red-50 rounded border border-red-100">
-            <p className="text-sm text-red-800">⚠️ {searchError}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        )}
+        </div>
       </div>
 
-      <div className={`${messages.filter(m => m.role !== 'system').length === 0 
-        ? 'fixed inset-0 flex items-center justify-center bg-transparent' 
-        : 'fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t'} z-40 transition-all duration-300`}>
-        <div className={`${messages.filter(m => m.role !== 'system').length === 0 
-          ? 'w-full max-w-2xl mx-auto px-6' 
-          : 'w-full max-w-4xl mx-auto px-6 py-4'}`}>
+      {/* Input area */}
+      <div className={`fixed bottom-0 left-0 right-0 bg-[#69c4ea] border-t border-[#5ab3d9] z-40`}>
+        <div className="w-full max-w-4xl mx-auto px-6 py-4">
           <form onSubmit={handleSubmit} className="flex flex-col items-center">
-            <div className="flex gap-2 w-full max-w-4xl">
+            <div className="flex gap-4 w-full max-w-4xl items-center">
               <input
                 value={input}
                 onChange={handleInputChange}
-                placeholder="Ask something..."
+                placeholder="Oooooh yeah! What do you need help with?"
                 autoFocus
-                className={`flex-1 p-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--brand-default)] text-base`}
+                className="flex-1 p-4 bg-white border-2 border-[#5ab3d9] rounded-xl focus:outline-none focus:ring-2 focus:ring-white text-base shadow-sm"
               />
               <button 
                 type="submit"
                 disabled={!input.trim() || isSearching}
-                className="px-5 py-3 bg-[var(--brand-default)] text-white rounded-md hover:bg-[var(--brand-muted)] font-medium w-[120px]"
+                className={`
+                  px-8
+                  h-[50px]
+                  bg-white
+                  text-[#69c4ea]
+                  rounded-xl
+                  hover:bg-[#e6f4fa]
+                  font-bold 
+                  text-lg
+                  flex
+                  items-center
+                  justify-center
+                  shadow-sm
+                  transition-colors
+                  border-2
+                  border-[#5ab3d9]
+                  ${isSearching ? 'opacity-75' : ''}
+                `}
               >
                 {isSearching ? (
                   <span className="inline-flex justify-center items-center">
-                    <span>Searching</span>
+                    <span>Ooooh!</span>
                     <span className="w-[24px] text-left">{loadingDots}</span>
                   </span>
                 ) : (
-                  'Search'
+                  'Can do!'
                 )}
               </button>
             </div>
             
-            {/* Add the notice text */}
             {showModelNotice && (
-              <p className="text-xs md:text-sm text-gray-600 mt-8">
-                Switched to DeepSeek V3 model from DeepSeek R1 due to high traffic
+              <p className="text-white text-center text-lg mt-8 font-medium">
+                Hi! I&apos;m Mr. DeepSeeks! I&apos;ll help you find what you need, then POOF! I cease to exist!
               </p>
             )}
           </form>
