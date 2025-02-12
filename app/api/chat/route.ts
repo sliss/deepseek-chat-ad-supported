@@ -3,7 +3,7 @@ import { fireworks } from '@ai-sdk/fireworks';
 import { streamText } from 'ai';
 
 // Update maxDuration to 30 seconds for hobby plan
-export const maxDuration = 30;
+export const maxDuration = 50;
 
 export async function POST(req: Request) {
   const { messages } = await req.json();

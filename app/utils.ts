@@ -1,3 +1,4 @@
-export const getAssetPath = (path: string): string => {
-  return `/deepseekchat${path}`;
-}; 
+export function getAssetPath(path: string): string {
+  // Remove any /deepseekchat prefix handling
+  return path;
+} 

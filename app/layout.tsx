@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://demo.exa.ai/deepseekchat/opengraph-image.jpg",
+        url: "https://demo.exa.ai/opengraph-image.jpg",
         width: 1200,
         height: 630,
         alt: "freeseek.ai"
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "freeseek.ai - Universal Knowledge Explorer",
     description: "Explore the world's knowledge with advanced AI-powered search and analysis",
-    images: ["https://demo.exa.ai/deepseekchat/opengraph-image.jpg"]
+    images: ["https://demo.exa.ai/opengraph-image.jpg"]
   },
-  metadataBase: new URL("https://demo.exa.ai/deepseekchat"),
+  metadataBase: new URL("https://demo.exa.ai"),
   robots: {
     index: true,
     follow: true

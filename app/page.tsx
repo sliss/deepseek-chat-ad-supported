@@ -344,7 +344,7 @@ export default function Page() {
       {/* Next.js Image (will take over if it loads successfully) */}
       <div className="fixed inset-0 -z-10">
         <Image
-          src="/deepseekchat/dunebg.jpg"
+          src="/dunebg.jpg"
           alt="Background"
           fill
           priority
