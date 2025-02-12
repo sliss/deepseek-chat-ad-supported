@@ -206,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @font-face {
   font-family: 'Codec-Cold';
-  src: url('/fonts/Codec-Cold-Regular.woff2') format('woff2');
+  src: url('/fonts/Codec-Cold-Regular.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -216,4 +216,51 @@ h1, h2, h3, h4, h5, h6 {
   .font-codec-cold {
     font-family: 'Codec-Cold', sans-serif;
   }
+}
+
+/* Add these new styles */
+.dune-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/dunebg.jpg');
+  background-color: #f5f7fa; /* Fallback color in case image fails to load */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0);
+  z-index: 1;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.dune-bg-fallback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/deepseekchat/dunebg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  z-index: -10;
 }
