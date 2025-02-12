@@ -77,6 +77,7 @@ export default function Page() {
     window.stratosSettings = {
       publisherId: '6660be5c4e70d17b07751c91', // prod demo publisher id
       disableInitialLoad: true,
+      hideSkeleton: true,
       adSlots: [
         {
           adUnitCode: 'demo-clarity-chat-ad-infeed',
@@ -87,24 +88,89 @@ export default function Page() {
       apiEndpoint: '/api/proxy-ads',
       cssOverrides:
         `:root {
-        --background: #f5efdd;
-        --text: #000;
-        --header: #ffffff4c;
-        --header-background: #ffffff10;
-        --title: #000;
-        --highlight: #c8ddff;
-        --action-button: #3b82f6;
-        --question-bubble: #FFF;
-        --radius: 5px;
-        --user-chat: #0061ff;
-        --system-chat: #e0e0e0;
-      }
-      #visit-site-link {
-        color: #FFF;
-      }
-      .ad-questions li:hover {
-        color: #000;
-      }`
+          --background: transparent;
+          --text: #404040;
+          --header: #525252;
+          --header-background: rgba(255, 255, 255, 0.9);
+          --title: #0066cc;
+          --highlight: #e5f0ff;
+          --action-button: #0066cc;
+          --question-bubble: rgba(255, 255, 255, 0.9);
+          --radius: 8px;
+          --user-chat: #0066cc;
+          --system-chat: rgba(255, 255, 255, 0.9);
+        }
+
+        .ad-container {
+          background: transparent;
+          font-family: var(--font-abcd-diatype), sans-serif;
+        }
+
+        .ad-header {
+          font-family: var(--font-abcd-diatype), sans-serif;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(0, 102, 204, 0.1);
+        }
+
+        .headline {
+          font-family: var(--font-abcd-diatype), sans-serif;
+          font-weight: 500;
+        }
+
+        .ad-questions li {
+          background: rgba(255, 255, 255, 0.95);
+          border: 1px solid rgba(0, 102, 204, 0.1);
+          border-left: 3px solid #0066cc;
+          box-shadow: 0 1px 3px rgba(0, 102, 204, 0.1);
+          transition: all 0.3s ease;
+        }
+
+        .ad-questions li:hover {
+          background: var(--highlight);
+          color: var(--brand-default);
+          border-left-color: var(--brand-default);
+        }
+
+        .chat-bubble.user-message {
+          color: #000000;
+        }
+
+        .ad-input-container {
+          background: rgba(255, 255, 255, 0.95);
+          border: 1px solid rgba(0, 102, 204, 0.1);
+          border-left: 3px solid #0066cc;
+          box-shadow: 0 1px 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .ad-input input {
+          font-family: var(--font-abcd-diatype), sans-serif;
+        }
+
+        #visit-site-link {
+          background: linear-gradient(135deg, #0066cc, #0052a3);
+          border: 1px solid rgba(0, 102, 204, 0.2);
+          box-shadow: 0 2px 4px rgba(0, 102, 204, 0.1);
+          color: #ffffff;
+          font-family: var(--font-abcd-diatype), sans-serif;
+          transition: all 0.3s ease;
+        }
+
+        #visit-site-link:hover {
+          background: var(--highlight);
+          color: var(--brand-default);
+        }
+
+        .chat-bubble {
+          background: rgba(255, 255, 255, 0.95);
+          border: 1px solid rgba(0, 102, 204, 0.1);
+          box-shadow: 0 1px 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .user-message {
+          background: var(--brand-default);
+          color: #ffffff;
+        }`
     };
 
     // @ts-ignore
@@ -427,8 +493,8 @@ export default function Page() {
                             </div>
                           )}
 
-                          {/* Add the ad anchor div here */}
-                          <div id="demo-clarity-chat-ad-infeed"></div>
+                          {/* Move the ad slot here, before the Thinking section */}
+                          <div id="demo-clarity-chat-ad-infeed" className="mb-10"></div>
 
                           {isLLMLoading && (
                             <div className="pt-6 flex items-center gap-2 text-[var(--brand-default)]">
