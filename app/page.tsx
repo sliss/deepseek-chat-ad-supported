@@ -258,10 +258,10 @@ export default function Page() {
     window.stratos.queue.push(function() {
       // @ts-ignore
       window.stratos.getAds(input, true);
-      setTimeout(() => {
-        // @ts-ignore
-        window.stratos.renderAds();
-      }, 0);
+      // setTimeout(() => {
+      //   // @ts-ignore
+      //   window.stratos.renderAds();
+      // }, 0);
     });
 
     try {
