@@ -1,7 +1,7 @@
 'use client';
 
 import { useChat, Message } from 'ai/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { getAssetPath } from './utils';
 import Image from 'next/image';
@@ -55,6 +55,35 @@ export default function Page() {
   const [hasConversationStarted, setHasConversationStarted] = useState(false);
   const [bgOpacity, setBgOpacity] = useState(1);
   const [overlayOpacity, setOverlayOpacity] = useState(0);
+  const adContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkContainer = () => {
+      const container = document.getElementById('demo-clarity-chat-ad-infeed');
+      if (container && searchResults.length > 0) {
+        // Small delay to ensure DOM is ready
+        setTimeout(() => {
+          // @ts-ignore
+          window.stratos?.queue.push(function() {
+            // @ts-ignore
+            window.stratos.renderAds();
+          });
+        }, 100);
+      }
+    };
+
+    // Check when searchResults change
+    checkContainer();
+
+    // Also set up a mutation observer to watch for container being added
+    const observer = new MutationObserver(checkContainer);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    return () => observer.disconnect();
+  }, [searchResults]);
 
   useEffect(() => {
     
@@ -258,10 +287,6 @@ export default function Page() {
     window.stratos.queue.push(function() {
       // @ts-ignore
       window.stratos.getAds(input, true);
-      // setTimeout(() => {
-      //   // @ts-ignore
-      //   window.stratos.renderAds();
-      // }, 0);
     });
 
     try {
@@ -483,6 +508,15 @@ export default function Page() {
                       {/* Search results section */}
                       {message.role === 'user' && (
                         <div className="my-10 space-y-4">
+                          {/* Move the ad container here, right after user message but before Seeking */}
+                          {hasConversationStarted && (
+                            <div 
+                              id="demo-clarity-chat-ad-infeed" 
+                              ref={adContainerRef} 
+                              className="mb-10 min-h-[275px]"
+                            ></div>
+                          )}
+
                           <div className="flex items-center gap-2">
                             <button 
                               onClick={() => setIsSourcesExpanded(!isSourcesExpanded)}
@@ -535,9 +569,6 @@ export default function Page() {
                               </div>
                             </div>
                           )}
-
-                          {/* Move the ad slot here, before the Thinking section */}
-                          <div id="demo-clarity-chat-ad-infeed" className="mb-10"></div>
 
                           {isLLMLoading && (
                             <div className="pt-6 flex items-center gap-2 text-[var(--brand-default)]">
